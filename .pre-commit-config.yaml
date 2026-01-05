@@ -7,3 +7,4 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
+        args: [--skip, "*.svg", --ignore-words-list, "commun"]
