@@ -19,6 +19,14 @@
 \usepackage{amsmath,amssymb}
 \usepackage[colorlinks=true,bookmarks=false,citecolor=blue,urlcolor=blue]{hyperref}
 
+% ADD THE FOLLOWING COUPLE LINES INTO YOUR PREAMBLE
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{0pt plus 0.3ex}
+}
+
 \begin{document}
 
 \title{GDSFactory: An Open-Source Python Library for Chip Design and Simulation}
@@ -60,7 +68,7 @@ GDSFactory implements cells as Python functions returning a \texttt{Component} c
 
 \section{Device Simulation}
 
-GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
+GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH \cite{gmsh} (through a wrapper \cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
 
 \begin{figure}[htbp]
 \centering
@@ -112,6 +120,13 @@ GDSFactory provides a unified Python-driven workflow spanning layout design, dev
 \bibitem{gdsfactoryplus} GDSFactory, ``GDSFactory+,'' \url{https://gdsfactory.com/}.
 
 \bibitem{awesome} J. Matres, ``Awesome Photonics,'' GitHub (2024), \url{https://github.com/joamatab/awesome_photonics}.
+
+\bibitem{meshwell} S. Bilodeau \textit{et al.}, ``Meshwell,'' GitHub (2026), \url{https://github.com/simbilod/meshwell}.
+
+\bibitem{devsim} J.~E. Sanchez, ``{DEVSIM}: {A} {TCAD} {Semiconductor} {Device} {Simulator},''\emph{Journal of Open Source Software}, vol.~7, no.~70, p. 3898, Feb. 2022. [Online]. Available: \url{https://doi.org/10.21105/joss.03898}
+
+\bibitem{gmsh} C.~Geuzaine and J.-F. Remacle, ``Gmsh: {A} 3-{D} finite element mesh generator with built-in pre- and post-processing facilities,'' \emph{Int. J. Numer. Meth. Engng}, vol.~79, no.~11, pp. 1309--1331, 2009. [Online]. Available: \url{https://doi.org/10.1002/nme.2579}
+
 
 \end{thebibliography}
 
