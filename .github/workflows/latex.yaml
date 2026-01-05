@@ -1,0 +1,79 @@
+name: CI/CD
+on: [push, pull_request]
+
+jobs:
+
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: gdsfactory.tex
+          args: -f -shell-escape -interaction=nonstopmode
+          post_compile: "latexmk -c"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: PDF-LaTeX
+          path: gdsfactory.pdf
+      - uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: .gitignore
+
+  build_markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex
+      - name: Convert Markdown to PDF
+        run: |
+          pandoc gdsfactory.md -o gdsfactory-md.pdf \
+            --pdf-engine=xelatex \
+            --variable geometry:margin=1in \
+            --variable fontsize=11pt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PDF-Markdown
+          path: gdsfactory-md.pdf
+
+  chktex_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: j2kun/chktex-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  biblatex_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Run biblatex-check
+        run: |
+          curl -O https://raw.githubusercontent.com/Pezmc/BibLatex-Check/v1.0.2/biblatex_check.py
+          python ./biblatex_check.py -b references.bib -a gdsfactory.aux
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Run pre-commit hooks
+        run: |
+          python -m pip install --upgrade pip
+          pip install pre-commit
+          pre-commit run -a
