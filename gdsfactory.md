@@ -72,13 +72,17 @@ Full-wave electromagnetic simulation is supported through three FDTD backends:
 - **DEVSIM** [7]: Open-source TCAD for semiconductor device physics, enabling carrier transport and electro-optic modulator simulation. GDSFactory exports doped regions and contacts directly to DEVSIM meshes.
 - **Sentaurus**: Commercial TCAD integration for advanced process and device simulation.
 
+### 3.4 RF Simulation
+
+- **Palace** [8]: Open-source FEM solver from AWS for high-speed RF and microwave simulations. Supports eigenmode analysis, frequency-domain driven simulations, and electrostatic/magnetostatic problems for modeling transmission lines, RF interconnects, and electro-optic modulators at microwave frequencies.
+
 ## 4. Circuit Simulation
 
 Circuit-level simulation enables system-scale photonic design through netlist extraction and S-parameter composition.
 
 ### 4.1 SAX S-Parameter Analysis
 
-SAX [8] provides differentiable S-parameter circuit simulation using JAX. GDSFactory extracts hierarchical netlists from layouts, associating each component with its S-parameter model:
+SAX [9] provides differentiable S-parameter circuit simulation using JAX. GDSFactory extracts hierarchical netlists from layouts, associating each component with its S-parameter model:
 
 ```python
 import sax
@@ -106,7 +110,7 @@ VLSIR provides SPICE netlist export for mixed photonic-electronic simulation, en
 
 ## 5. Process Design Kits
 
-Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm [9], VTT 3 μm SOI, and SiEPIC. Commercial PDKs under NDA include AIM, AMF, TowerSemi, IMEC, and HHI. The generic PDK follows standard layer conventions [10] for cross-foundry compatibility. Each PDK includes layer definitions, design rules, and validated component models for circuit simulation.
+Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm [10], VTT 3 μm SOI, and SiEPIC. Commercial PDKs under NDA include AIM, AMF, TowerSemi, IMEC, and HHI. The generic PDK follows standard layer conventions [11] for cross-foundry compatibility. Each PDK includes layer definitions, design rules, and validated component models for circuit simulation.
 
 ## 6. Conclusion
 
@@ -128,8 +132,10 @@ GDSFactory provides a unified Python-driven workflow spanning layout design, dev
 
 7. J. E. Sanchez, "DEVSIM," https://devsim.org/.
 
-8. F. Laporte, "SAX," GitHub (2023), https://github.com/flaport/sax.
+8. AWS, "Palace: 3D Finite Element Solver for Computational Electromagnetics," GitHub (2024), https://github.com/awslabs/palace.
 
-9. SkyWater Technology Foundry and Google, "SkyWater Open Source PDK," GitHub (2023), https://github.com/google/skywater-pdk.
+9. F. Laporte, "SAX," GitHub (2023), https://github.com/flaport/sax.
 
-10. L. Chrostowski and M. Hochberg, *Silicon Photonics Design* (Cambridge, 2015).
+10. SkyWater Technology Foundry and Google, "SkyWater Open Source PDK," GitHub (2023), https://github.com/google/skywater-pdk.
+
+11. L. Chrostowski and M. Hochberg, *Silicon Photonics Design* (Cambridge, 2015).

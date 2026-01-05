@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.1)  5 JAN 2026 00:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.1)  5 JAN 2026 00:55
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -421,11 +421,11 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 70.
 Package epstopdf Info: Source file: <figures/gmsh/dessin.eps>
-(epstopdf)                    date: 2026-01-05 00:40:18
+(epstopdf)                    date: 2026-01-05 00:53:25
 (epstopdf)                    size: 341684 bytes
 (epstopdf)             Output file: <figures/gmsh/dessin-eps-converted-to.pdf>
-(epstopdf)                    date: 2026-01-05 00:42:10
-(epstopdf)                    size: 296834 bytes
+(epstopdf)                    date: 2026-01-05 00:55:17
+(epstopdf)                    size: 296835 bytes
 (epstopdf)             Command: <epstopdf --outfile=figures/gmsh/dessin-eps-con
 verted-to.pdf figures/gmsh/dessin.eps>
 (epstopdf)             \includegraphics on input line 80.
@@ -472,7 +472,7 @@ pt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/te
 xlive/texdir/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></opt/texlive/texdir/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/texlive/texdir/texmf-dist/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on gdsfactory.pdf (2 pages, 394995 bytes).
+Output written on gdsfactory.pdf (2 pages, 394994 bytes).
 PDF statistics:
  97 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
