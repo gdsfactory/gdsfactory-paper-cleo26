@@ -32,25 +32,6 @@ Unlike constrained logic-driven electronic design flows [2], integrated photonic
 
 GDSFactory implements cells as Python functions returning a `Component` class with polygons, port metadata, and convenience methods. Using KLayout's C++ geometry engine [3], users define PCells with a functional programming approach:
 
-```python
-import GDSFactory as gf
-
-@gf.cell
-def mzi_with_bend(radius=10):
-    c = gf.Component()
-    mzi = c.add_ref(gf.components.mzi())
-    bend = c.add_ref(
-        gf.components.bend_euler(radius=radius))
-    bend.connect('o1', mzi['o2'])
-    return c
-```
-
-The `@gf.cell` decorator handles caching, eliminating redundant regeneration. Port metadata enables automatic routing via `get_route` and `get_bundle` functions that connect components following `CrossSection` specifications (Fig. 2).
-
-![Figure 2a](figures/gdsfactory_components/mzi_with_bend.png)
-
-**Figure 2:** (a) MZI with Euler bend showing port connections. (b) Routed n×n components using S-bends.
-
 ## 3. Device Simulation
 
 GDSFactory's gplugins repository provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig. 3).
@@ -61,11 +42,15 @@ GDSFactory's gplugins repository provides unified interfaces to device simulator
 
 ### 3.1 FDTD Simulation
 
-Full-wave electromagnetic simulation is supported through three FDTD backends:
+Full-wave electromagnetic simulation is supported through open-source FDTD backends:
 
 - **MEEP** [4]: Open-source FDTD solver for computing transmission spectra, field profiles, and S-parameters. GDSFactory automatically generates simulation regions, sources, and monitors from component geometry.
-- **Tidy3D** [5]: Cloud-based FDTD with GPU acceleration enabling rapid parametric sweeps. The interface handles geometry export, material mapping, and result retrieval.
-- **Lumerical FDTD**: Industry-standard solver integration for users with existing licenses, supporting automated scripting and result import.
+- **Luminescent AI**: Open-source Python wrapper providing simplified FDTD workflows with automatic meshing and optimization capabilities.
+
+And proprietary FDTD solvers:
+
+- **Tidy3D** [5]: Cloud-based proprietary FDTD with GPU acceleration enabling rapid parametric sweeps. The interface handles geometry export, material mapping, and result retrieval.
+- **Lumerical FDTD**: Proprietary FDTD supporting automated scripting and result import.
 
 ### 3.2 FEM and Multiphysics Solvers
 
