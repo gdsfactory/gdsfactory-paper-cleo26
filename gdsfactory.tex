@@ -56,21 +56,11 @@ Unlike constrained logic-driven electronic design flows~\cite{bogaerts2018}, int
 
 \section{Layout Design}
 
-GDSFactory implements cells as Python functions returning a \texttt{Component} class with polygons, port metadata, and convenience methods. Using KLayout's C++ geometry engine~\cite{klayout}, users define PCells with a functional programming approach:
-
-The \texttt{@gf.cell} decorator handles caching, eliminating redundant regeneration. Port metadata enables automatic routing via \texttt{get\_route} and \texttt{get\_bundle} functions that connect components following \texttt{CrossSection} specifications (Fig.~\ref{fig:components}).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=4cm]{figures/gdsfactory_components/mzi_with_bend.pdf}
-\includegraphics[width=4cm]{figures/gdsfactory_components/nxn.pdf}
-\caption{(a) MZI with Euler bend showing port connections. (b) Routed $n\!\times\!n$ components using S-bends.}
-\label{fig:components}
-\end{figure}
+GDSFactory implements cells as Python functions returning a \texttt{Component} class with polygons, port metadata, and convenience methods. Using KLayout's C++ geometry engine~\cite{klayout}, users define parametric cells through a functional programming approach where the \texttt{@gf.cell} decorator handles caching to eliminate redundant regeneration. Port metadata enables automatic routing via \texttt{route_bundle} that defines an automated route between groups of ports based on their types (optical, electrical, etc.).
 
 \section{Device Simulation}
 
-GDSFactory's gplugins repository provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
+GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
 
 \begin{figure}[htbp]
 \centering
@@ -96,6 +86,8 @@ GDSFactory provides a unified Python-driven workflow spanning layout design, dev
 \begin{thebibliography}{99}
 
 \bibitem{gdsfactory} J. Matres \textit{et al.}, ``GDSFactory,'' GitHub (2024), \url{https://github.com/GDSFactory/GDSFactory}.
+
+\bibitem{gplugins} J. Matres \textit{et al.}, ``gplugins,'' GitHub (2024), \url{https://github.com/gdsfactory/gplugins}.
 
 \bibitem{bogaerts2018} W. Bogaerts \textit{et al.}, ``Silicon photonics circuit design: methods, tools and challenges,'' Laser Photon. Rev. \textbf{12}, 1700237 (2018).
 
