@@ -1,0 +1,3 @@
+[codespell]
+skip = *.sty,*.log,*.cls,*.bst,*.bbl,*.ldf,*.pdf,*.bib
+ignore-words-list = tork,synopsys

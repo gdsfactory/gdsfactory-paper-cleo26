@@ -1,0 +1,24 @@
+name: nxn_to_nxn
+instances:
+    c1:
+      component: nxn
+      settings:
+        east: 3
+        ysize: 20
+    c2:
+      component: nxn
+      settings:
+        west: 3
+placements:
+    c2:
+      x: 40
+      y: 10
+routes:
+  optical:
+    routing_strategy: get_bundle
+    settings:
+      with_sbend: True
+    links:
+      c1,o4: c2,o1
+      c1,o3: c2,o2
+      c1,o2: c2,o3

@@ -1,0 +1,28 @@
+# Compiled PDFs should be in the gh-pages branch
+gdsfactory.pdf
+
+# LaTeX files
+*.aux
+*.fdb*
+*.fls
+*.log
+*.bbl
+*.bcf
+*.blg
+*.out
+*.run.xml
+*.xdv
+*.xmpdata
+*.toc
+_minted-*
+*.synctex.gz
+*.synctex(busy)
+pdfa.xmpi
+creationdate.lua
+*.timestamp
+*.pyg
+*.aex
+
+# CI
+biblatex_check.py
+references.bib.original

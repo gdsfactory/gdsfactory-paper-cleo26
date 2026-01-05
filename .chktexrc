@@ -1,0 +1,47 @@
+QuoteStyle = Logical
+TabSize = 4
+
+WordDash
+{
+    2
+}
+
+VerbEnvir
+{
+    verbatim comment listing verbatimtab rawhtml errexam picture texdraw
+    filecontents pgfpicture tikzpicture minted lstlisting texttt luacode
+    thesisabstract
+}
+
+WipeArg
+{
+    \label:{} \ref:{} \eqref:{} \vref:{} \pageref:{} \index:[]{}
+    \cite:[][]{} \nocite:{}
+    \input:{} \verbatiminput:[]{} \listinginput:[]{}{}
+    \verbatimtabinput:[]{} \include:{} \includeonly:{}
+    \bibitem:[]{}
+    \cline:{} \cmidrule:[](){}
+    \href:{}{}
+    \setmainfont:*[]{} \setsansfont:*[]{} \setmonofont:*[]{}
+    \newcommand:{}[]{}
+    \directlua:{}
+    \subfloat:[][]{}
+    \thesisabstract:{}
+}
+
+Silent
+{
+    % Logic
+    \ifPDFTeX \ifLuaTeX \ifhyperref \newunit
+
+    % Aalto Thesis style
+    \makecoverpage \makecopyrightpage \thesistableofcontents
+
+    % Math
+    \to
+}
+
+CmdLine
+{
+    -n 3 -n 8 -n 11 -n 21 -n 24 -n 38 -n 44 -n 46
+}
