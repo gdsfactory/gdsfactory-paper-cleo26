@@ -20,7 +20,7 @@
 \usepackage[colorlinks=true,bookmarks=false,citecolor=blue,urlcolor=blue]{hyperref}
 
 % ADD THE FOLLOWING COUPLE LINES INTO YOUR PREAMBLE
-\let\OLDthebibliography\thebibliography
+\let\OLDthebibliography\thebibliography%
 \renewcommand\thebibliography[1]{
   \OLDthebibliography{#1}
   \setlength{\parskip}{0pt}
@@ -69,7 +69,7 @@ GDSFactory implements cells as Python functions returning a \texttt{Component} c
 
 \section{Device Simulation}
 
-GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH \cite{gmsh} (through a wrapper \cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}). Finite-difference time domain electromagnetic simulation is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI, as well as proprietary solvers Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. FEM and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW \cite{meow} for eigenmode expansion. TCAD simulation uses DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation.
+GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH~\cite{gmsh} (through a wrapper~\cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}). Finite-difference time domain electromagnetic simulation is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI\@, as well as proprietary solvers Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. FEM and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW~\cite{meow} for eigenmode expansion. TCAD simulation uses DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation. % chktex 13
 
 \begin{figure}[htbp]
 \centering
@@ -84,11 +84,11 @@ Circuit-level simulation enables system-scale photonic design. GDSFactory facili
 
 \section{Process Design Kits}
 
-Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm~\cite{skywater}, VTT 3\,\textmu m SOI, SiEPIC, Cornerstone, IHP, Luxtelligence, and Quantum-RF-PDK. Commercial PDKs available through GDSFactory+ subscription~\cite{gdsfactoryplus} include AIM Photonics, AMF, CompoundTek, Fraunhofer HHI, Smart Photonics, Tower PH18, OpenLight, III-V Labs, LioniX, Ligentec, Lightium, and QCI. The generic PDK follows standard layer conventions~\cite{chrostowski2015} for cross-foundry compatibility.
+Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm~\cite{skywater}, VTT 3\,\textmu{}m SOI, SiEPIC, Cornerstone, IHP, Luxtelligence, and Quantum-RF-PDK\@. Commercial PDKs available through GDSFactory+ subscription~\cite{gdsfactoryplus} include AIM Photonics, AMF, CompoundTek, Fraunhofer HHI, Smart Photonics, Tower PH18, OpenLight, III-V Labs, LioniX, Ligentec, Lightium, and QCI\@. The generic PDK follows standard layer conventions~\cite{chrostowski2015} for cross-foundry compatibility.
 
 \section{Conclusion}
 
-GDSFactory provides a unified Python-driven workflow spanning layout, device simulation, and circuit simulation. The tight integration between device solvers and circuit simulators enables rapid design iteration from component to system level, and its programmatic, open nature enables modern agentic workflows \cite{Sharma2025}.  The library is freely available at \url{https://github.com/GDSFactory/GDSFactory}.
+GDSFactory provides a unified Python-driven workflow spanning layout, device simulation, and circuit simulation. The tight integration between device solvers and circuit simulators enables rapid design iteration from component to system level, and its programmatic, open nature enables modern agentic workflows~\cite{Sharma2025}.  The library is freely available at \url{https://github.com/GDSFactory/GDSFactory}.
 
 \begin{thebibliography}{99}
 
@@ -106,7 +106,7 @@ GDSFactory provides a unified Python-driven workflow spanning layout, device sim
 
 \bibitem{meshwell} S. Bilodeau \textit{et al.}, ``Meshwell,'' GitHub (2026), \url{https://github.com/simbilod/meshwell}.
 
-\bibitem{meep} A. F. Oskooi \textit{et al.}, ``MEEP: A flexible free-software package for electromagnetic simulations by the FDTD method,'' Comput. Phys. Commun. \textbf{181}, 687--702 (2010).
+\bibitem{meep} A. F. Oskooi \textit{et al.}, ``MEEP: A flexible free-software package for electromagnetic simulations by the FDTD method,'' Comput.\ Phys.\ Commun.\ \textbf{181}, 687--702 (2010). % chktex 13
 
 \bibitem{tidy3d} Flexcompute Inc., ``Tidy3D,'' \url{https://www.flexcompute.com/tidy3d/}.
 
@@ -127,7 +127,7 @@ GDSFactory provides a unified Python-driven workflow spanning layout, device sim
 \bibitem{chrostowski2015} L. Chrostowski and M. Hochberg, \textit{Silicon Photonics Design} (Cambridge, 2015).
 
 \bibitem{Sharma2025}
-A.~Sharma \emph{et al.}, ``AI agents for photonic integrated circuit design automation,'' \emph{APL Machine Learning}, vol.~3, no.~4, Dec. 2025. doi: 10.1063/5.0300741.
+A.~Sharma \emph{et al.}, ``AI agents for photonic integrated circuit design automation,'' \emph{APL Machine Learning}, vol.~3, no.~4, Dec.~2025. doi: 10.1063/5.0300741. % chktex 12
 
 \end{thebibliography}
 
