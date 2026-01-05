@@ -1,13 +1,16 @@
 # GDSFactory: An Open-Source Python Library for Chip Design and Simulation
 
-**Authors:** Joaquin Matres<sup>1,*</sup>, Simon Bilodeau<sup>2,3</sup>, Niko Savola<sup>2,4</sup>, Helge Gehring<sup>6</sup> and Troy Tamas<sup>1</sup>
+**Authors:** Joaquin Matres<sup>1,*</sup>, Simon Bilodeau<sup>3</sup>, Niko Savola<sup>2,4</sup>, Marc de Cea<sup>2</sup>, Wai Kwan Yeung<sup>5</sup>, Erman Timurdogan<sup>7</sup>, Helge Gehring<sup>6</sup> and Troy Tamas<sup>1</sup>
 
 **Affiliations:**
 1. GDSFactory, 650 Castro St Ste 120 PMB 98035, Mountain View, CA 94041, USA
-2. X Development LLC, 100 Mayfield Ave, Mountain View, CA 94043, USA
+2. Taara Co., Mountain View, CA, USA
 3. Department of Electrical and Computer Engineering, Princeton University, Princeton, NJ 08544, USA
 4. Department of Applied Physics, Aalto University, PO Box 13500, FIN-00076 Aalto, Finland
+5. Department of Physics, University of Oxford, Oxford, UK
 6. Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA
+7. Lumentum, San Jose, CA, USA
+
 
 **Corresponding author:** *jmatres@GDSFactory.com
 
@@ -19,7 +22,11 @@ We present GDSFactory, an open-source Python library for integrated circuit desi
 
 Hardware iterations typically require months and millions of dollars, while software iterations cost hundreds of dollars and take hours. GDSFactory bridges this gap by providing a comprehensive Python API for chip development, including layout design, device simulation, circuit simulation, and verification [1].
 
-Unlike constrained logic-driven electronic design flows [2], integrated photonics requires freeform parametric geometries and tight integration between layout and electromagnetic simulation. GDSFactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, routing, and seamless interfaces to industry-standard simulators---all in Python's extensive scientific ecosystem.
+Unlike constrained logic-driven electronic design flows [2], integrated photonics requires freeform parametric geometries and tight integration between layout and electromagnetic simulation. GDSFactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, routing, and seamless interfaces to industry-standard simulators---all in Python's extensive scientific ecosystem (Fig. 1).
+
+![Figure 1](figures/flow/flow.png)
+
+**Figure 1:** GDSFactory workflow: Design phase (simulation, schematic capture, layout), Verification (DRC, LVS), and Validation to ensure the fabricated product meets specifications.
 
 ## 2. Layout Design
 
@@ -38,20 +45,19 @@ def mzi_with_bend(radius=10):
     return c
 ```
 
-The `@gf.cell` decorator handles caching, eliminating redundant regeneration. Port metadata enables automatic routing via `get_route` and `get_bundle` functions that connect components following `CrossSection` specifications (Fig. 1).
+The `@gf.cell` decorator handles caching, eliminating redundant regeneration. Port metadata enables automatic routing via `get_route` and `get_bundle` functions that connect components following `CrossSection` specifications (Fig. 2).
 
-![Figure 1](figures/gdsfactory_components/mzi_with_bend.png)
-![Figure 1b](figures/gdsfactory_components/nxn.png)
+![Figure 2a](figures/gdsfactory_components/mzi_with_bend.png)
 
-**Figure 1:** (a) MZI with Euler bend showing port connections. (b) Routed n×n components using S-bends.
+**Figure 2:** (a) MZI with Euler bend showing port connections. (b) Routed n×n components using S-bends.
 
 ## 3. Device Simulation
 
-GDSFactory's gplugins repository provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig. 2).
+GDSFactory's gplugins repository provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig. 3).
 
-![Figure 2](figures/gmsh/dessin.png)
+![Figure 3](figures/gmsh/dessin.png)
 
-**Figure 2:** GDSFactory meshing: (a) heater layout, (b) cross-sectional mesh, (c) 3D mesh.
+**Figure 3:** GDSFactory meshing: (a) heater layout, (b) cross-sectional mesh, (c) 3D mesh.
 
 ### 3.1 FDTD Simulation
 
@@ -61,9 +67,10 @@ Full-wave electromagnetic simulation is supported through three FDTD backends:
 - **Tidy3D** [5]: Cloud-based FDTD with GPU acceleration enabling rapid parametric sweeps. The interface handles geometry export, material mapping, and result retrieval.
 - **Lumerical FDTD**: Industry-standard solver integration for users with existing licenses, supporting automated scripting and result import.
 
-### 3.2 Mode and FEM Solvers
+### 3.2 FEM and Multiphysics Solvers
 
 - **Femwell** [6]: Open-source FEM solver for waveguide mode analysis, thermal simulation, and electro-optic modeling. Computes effective indices, group indices, and mode overlaps directly from GDSFactory cross-sections.
+- **Palace** [8]: Open-source FEM solver from AWS for high-speed RF and microwave simulations. Supports eigenmode analysis, frequency-domain driven simulations, and electrostatic/magnetostatic problems for modeling transmission lines, RF interconnects, and electro-optic modulators at microwave frequencies.
 - **MPB**: MIT Photonic Bands for photonic crystal and periodic structure analysis.
 - **MEOW**: Eigenmode expansion (EME) for propagation through adiabatic tapers and mode converters.
 
@@ -72,10 +79,6 @@ Full-wave electromagnetic simulation is supported through three FDTD backends:
 - **DEVSIM** [7]: Open-source TCAD for semiconductor device physics, enabling carrier transport and electro-optic modulator simulation. GDSFactory exports doped regions and contacts directly to DEVSIM meshes.
 - **Sentaurus**: Commercial TCAD integration for advanced process and device simulation.
 
-### 3.4 RF Simulation
-
-- **Palace** [8]: Open-source FEM solver from AWS for high-speed RF and microwave simulations. Supports eigenmode analysis, frequency-domain driven simulations, and electrostatic/magnetostatic problems for modeling transmission lines, RF interconnects, and electro-optic modulators at microwave frequencies.
-
 ## 4. Circuit Simulation
 
 Circuit-level simulation enables system-scale photonic design through netlist extraction and S-parameter composition.
@@ -83,21 +86,6 @@ Circuit-level simulation enables system-scale photonic design through netlist ex
 ### 4.1 SAX S-Parameter Analysis
 
 SAX [9] provides differentiable S-parameter circuit simulation using JAX. GDSFactory extracts hierarchical netlists from layouts, associating each component with its S-parameter model:
-
-```python
-import sax
-
-# Define component models
-models = {
-    "mmi1x2": sax.models.mmi1x2,
-    "bend_euler": sax.models.bend_euler,
-    "straight": sax.models.straight,
-}
-
-# Simulate circuit from netlist
-circuit, _ = sax.circuit(netlist=netlist, models=models)
-S = circuit(wl=1.55)
-```
 
 SAX supports:
 - Automatic differentiation for gradient-based optimization
@@ -110,7 +98,40 @@ VLSIR provides SPICE netlist export for mixed photonic-electronic simulation, en
 
 ## 5. Process Design Kits
 
-Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm [10], VTT 3 μm SOI, and SiEPIC. Commercial PDKs under NDA include AIM, AMF, TowerSemi, IMEC, and HHI. The generic PDK follows standard layer conventions [11] for cross-foundry compatibility. Each PDK includes layer definitions, design rules, and validated component models for circuit simulation.
+GDSFactory supports a wide range of open-source and commercial PDKs. Each PDK includes layer definitions, design rules, and validated component models for circuit simulation, following standard layer conventions [11] for cross-foundry compatibility.
+
+### 5.1 Open-Source PDKs
+
+**Photonics:**
+- [Cornerstone PDK](https://github.com/gdsfactory/cspdk)
+- [SiEPIC Ebeam UBC PDK](https://github.com/gdsfactory/ubc)
+- [VTT PDK](https://github.com/gdsfactory/vtt)
+- [Luxtelligence GF PDK](https://github.com/Luxtelligence/lxt_pdk_gf)
+
+**Quantum:**
+- [Quantum RF PDK](https://github.com/gdsfactory/quantum-rf-pdk)
+
+**RF/AMS/Digital/Analog:**
+- [IHP PDK](https://gdsfactory.github.io/IHP)
+- [GlobalFoundries 180nm MCU CMOS PDK](https://gdsfactory.github.io/gf180mcu/)
+- [SkyWater 130nm CMOS PDK](https://gdsfactory.github.io/skywater130/) [10]
+
+### 5.2 Foundry PDKs (NDA Required)
+
+Commercial PDKs available through [GDSFactory+](https://gdsfactory.com/) subscription:
+
+- AIM Photonics
+- AMF Photonics
+- CompoundTek Photonics
+- Fraunhofer HHI Photonics
+- Smart Photonics
+- Tower Semiconductor PH18
+- Tower PH18DA by OpenLight
+- III-V Labs
+- LioniX
+- Ligentec
+- Lightium
+- Quantum Computing Inc. (QCI)
 
 ## 6. Conclusion
 

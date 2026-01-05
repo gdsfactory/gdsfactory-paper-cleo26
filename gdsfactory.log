@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.1)  5 JAN 2026 00:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.1)  5 JAN 2026 02:46
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -352,21 +352,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-
-./gdsfactory.tex:22: LaTeX Error: No \title given.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 \begin{document}
-                     
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: No \author given.
-
 (/opt/texlive/texdir/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
 
@@ -377,105 +362,110 @@ Package color Info: Driver file: pdftex.def on input line 149.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/graphics/mathcolor.ltx))
 Package hyperref Info: Link coloring ON on input line 22.
-<figures/gdsfactory_components/mzi_with_bend.pdf, id=8, 462.52798pt x 346.89601
-pt>
-File: figures/gdsfactory_components/mzi_with_bend.pdf Graphic file (type pdf)
-<use figures/gdsfactory_components/mzi_with_bend.pdf>
-Package pdftex.def Info: figures/gdsfactory_components/mzi_with_bend.pdf  used 
-on input line 68.
-(pdftex.def)             Requested size: 113.81102pt x 85.35814pt.
-<figures/gdsfactory_components/nxn.pdf, id=9, 462.52798pt x 346.89601pt>
-File: figures/gdsfactory_components/nxn.pdf Graphic file (type pdf)
-<use figures/gdsfactory_components/nxn.pdf>
-Package pdftex.def Info: figures/gdsfactory_components/nxn.pdf  used on input l
-ine 69.
-(pdftex.def)             Requested size: 113.81102pt x 85.35814pt.
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
- 70.
+ 39.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
- 70.
+ 39.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
- 70.
+ 39.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
- 70.
+ 39.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 70.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 70.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 70.
-Package epstopdf Info: Source file: <figures/gmsh/dessin.eps>
-(epstopdf)                    date: 2026-01-05 00:53:25
-(epstopdf)                    size: 341684 bytes
-(epstopdf)             Output file: <figures/gmsh/dessin-eps-converted-to.pdf>
-(epstopdf)                    date: 2026-01-05 00:55:17
-(epstopdf)                    size: 296835 bytes
-(epstopdf)             Command: <epstopdf --outfile=figures/gmsh/dessin-eps-con
-verted-to.pdf figures/gmsh/dessin.eps>
-(epstopdf)             \includegraphics on input line 80.
-Package epstopdf Info: Output file is already uptodate.
-<figures/gmsh/dessin-eps-converted-to.pdf, id=12, 2865.70625pt x 664.4825pt>
-File: figures/gmsh/dessin-eps-converted-to.pdf Graphic file (type pdf)
-<use figures/gmsh/dessin-eps-converted-to.pdf>
-Package pdftex.def Info: figures/gmsh/dessin-eps-converted-to.pdf  used on inpu
-t line 80.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+
+
+LaTeX Warning: File `figures/flow/flow.pdf' not found on input line 52.
+
+
+./gdsfactory.tex:52: Package pdftex.def Error: File `figures/flow/flow.pdf' not
+ found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.52 ...graphics[width=8cm]{figures/flow/flow.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[1
+
+{/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/opt/texlive
+/texdir/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+<figures/gdsfactory_components/mzi_with_bend.pdf, id=24, 462.52798pt x 346.8960
+1pt>
+File: figures/gdsfactory_components/mzi_with_bend.pdf Graphic file (type pdf)
+<use figures/gdsfactory_components/mzi_with_bend.pdf>
+Package pdftex.def Info: figures/gdsfactory_components/mzi_with_bend.pdf  used 
+on input line 78.
+(pdftex.def)             Requested size: 113.81102pt x 85.35814pt.
+<figures/gdsfactory_components/nxn.pdf, id=25, 462.52798pt x 346.89601pt>
+File: figures/gdsfactory_components/nxn.pdf Graphic file (type pdf)
+<use figures/gdsfactory_components/nxn.pdf>
+Package pdftex.def Info: figures/gdsfactory_components/nxn.pdf  used on input l
+ine 79.
+(pdftex.def)             Requested size: 113.81102pt x 85.35814pt.
+<figures/gmsh/dessin.pdf, id=27, 2865.70625pt x 664.4825pt>
+File: figures/gmsh/dessin.pdf Graphic file (type pdf)
+<use figures/gmsh/dessin.pdf>
+Package pdftex.def Info: figures/gmsh/dessin.pdf  used on input line 90.
 (pdftex.def)             Requested size: 227.62204pt x 52.77438pt.
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 8
-9.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+03.
 
 (/opt/texlive/texdir/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
- [1
-
-{/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/opt/texlive
-/texdir/texmf-dist/fonts/enc/dvips/base/8r.enc} <./figures/gdsfactory_component
-s/mzi_with_bend.pdf> <./figures/gdsfactory_components/nxn.pdf>] [2 <./figures/g
-msh/dessin-eps-converted-to.pdf>] (./gdsfactory.aux)
+) [2 <./figures/gdsfactory_components/mzi_with_bend.pdf> <./figures/gdsfactory_
+components/nxn.pdf> <./figures/gmsh/dessin.pdf>] [3] (./gdsfactory.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 10016 strings out of 467538
- 152074 string characters out of 5421637
- 566553 words of memory out of 5000000
- 38777 multiletter control sequences out of 15000+600000
- 655966 words of font info for 104 fonts, out of 8000000 for 9000
+ 10063 strings out of 467538
+ 153059 string characters out of 5421637
+ 563818 words of memory out of 5000000
+ 38813 multiletter control sequences out of 15000+600000
+ 661379 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,409b,452s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,79p,569b,633s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></o
 pt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/te
 xlive/texdir/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></opt/texlive/texdir/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/texlive/texdir/texmf-dist/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on gdsfactory.pdf (2 pages, 394994 bytes).
+Output written on gdsfactory.pdf (3 pages, 408398 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
- 18 named destinations out of 1000 (max. 500000)
+ 119 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
+ 25 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

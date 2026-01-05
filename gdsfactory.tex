@@ -21,35 +21,45 @@
 
 \begin{document}
 
-\title{GDSfactory: An Open-Source Python Library for Chip Design Automation}
+\title{GDSFactory: An Open-Source Python Library for Chip Design and Simulation}
 
-\author{Joaquin Matres,\authormark{1,*} Simon Bilodeau,\authormark{2,3} Niko Savola,\authormark{2,4} Ali Hammoud,\authormark{5} Paul R. Prucnal,\authormark{3} and Helge Gehring\authormark{6}}
+\author{Joaquin Matres,\authormark{1,*} Simon Bilodeau,\authormark{3} Niko Savola,\authormark{2,4} Marc de Cea,\authormark{2} Wai Kwan Yeung,\authormark{5} Erman Timurdogan,\authormark{7} Helge Gehring,\authormark{6} and Troy Tamas\authormark{1}}
 
 \address{\authormark{1}GDSFactory, 650 Castro St Ste 120 PMB 98035, Mountain View, CA 94041, USA\\
-\authormark{2}X Development LLC, 100 Mayfield Ave, Mountain View, CA 94043, USA\\
+\authormark{2}Taara Co., Mountain View, CA, USA\\
 \authormark{3}Department of Electrical and Computer Engineering, Princeton University, Princeton, NJ 08544, USA\\
 \authormark{4}Department of Applied Physics, Aalto University, PO Box 13500, FIN-00076 Aalto, Finland\\
-\authormark{5}Department of Electrical Engineering and Computer Science, University of Michigan, Ann Arbor, MI 48109, USA\\
-\authormark{6}Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA}
+\authormark{5}Department of Physics, University of Oxford, Oxford, UK\\
+\authormark{6}Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA\\
+\authormark{7}Lumentum, San Jose, CA, USA}
 
 \email{\authormark{*}jmatres@gdsfactory.com}
 
+\maketitle
+
 \begin{abstract}
-We present gdsfactory, an open-source Python library for integrated circuit design automation supporting photonics, analog, quantum, and MEMS applications with unified design, simulation, verification, and validation workflows.
+We present GDSFactory, an open-source Python library for integrated circuit design automation supporting photonics, analog, quantum, and MEMS applications. The platform provides unified workflows spanning layout design, device simulation through FDTD (MEEP, Tidy3D, Lumerical), FEM (Femwell), and TCAD (DEVSIM) solvers, and circuit simulation via SAX S-parameter analysis.
 \end{abstract}
 
 \section{Introduction}
 
-Hardware iterations typically require months and millions of dollars, while software iterations cost hundreds of dollars and take hours. Gdsfactory bridges this gap by providing a comprehensive Python API for chip development, including layout design, verification, and validation~\cite{gdsfactory}.
+Hardware iterations typically require months and millions of dollars, while software iterations cost hundreds of dollars and take hours. GDSFactory bridges this gap by providing a comprehensive Python API for chip development, including layout design, device simulation, circuit simulation, and verification~\cite{gdsfactory}.
 
-Unlike constrained logic-driven electronic design flows~\cite{bogaerts2018}, integrated photonics requires freeform parametric geometries. Gdsfactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, and routing---all in Python's extensive scientific ecosystem.
+Unlike constrained logic-driven electronic design flows~\cite{bogaerts2018}, integrated photonics requires freeform parametric geometries and tight integration between layout and electromagnetic simulation. GDSFactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, routing, and seamless interfaces to industry-standard simulators---all in Python's extensive scientific ecosystem (Fig.~\ref{fig:flow}).
 
-\section{Design Capabilities}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{figures/flow/flow.pdf}
+\caption{GDSFactory workflow: Design phase (simulation, schematic capture, layout), Verification (DRC, LVS), and Validation to ensure the fabricated product meets specifications.}
+\label{fig:flow}
+\end{figure}
 
-Gdsfactory implements cells as Python functions returning a \texttt{Component} class with polygons, port metadata, and convenience methods. Using a C++-based gdstk backend~\cite{gdstk}, users define PCells with a functional programming approach:
+\section{Layout Design}
+
+GDSFactory implements cells as Python functions returning a \texttt{Component} class with polygons, port metadata, and convenience methods. Using KLayout's C++ geometry engine~\cite{klayout}, users define PCells with a functional programming approach:
 
 \begin{verbatim}
-import gdsfactory as gf
+import GDSFactory as gf
 
 @gf.cell
 def mzi_with_bend(radius=10):
@@ -71,18 +81,22 @@ The \texttt{@gf.cell} decorator handles caching, eliminating redundant regenerat
 \label{fig:components}
 \end{figure}
 
-\section{Simulation and Verification}
+\section{Device Simulation}
 
-Gdsfactory's gplugins repository interfaces with simulators by reusing layout abstractions. Device-level exports include: FDTD solvers (MEEP~\cite{meep}, Tidy3D, Lumerical), mode solvers (Femwell, MPB), EME (MEOW), and TCAD (DEVSIM, Sentaurus). Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
+GDSFactory's gplugins repository provides unified interfaces to device simulators by reusing layout abstractions. Components can be meshed via GMSH for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}).
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{figures/gmsh/dessin.eps}
-\caption{Gdsfactory meshing: (a) heater layout, (b) cross-sectional mesh, (c) 3D mesh.}
+\includegraphics[width=8cm]{figures/gmsh/dessin.pdf}
+\caption{GDSFactory meshing: (a) heater layout, (b) cross-sectional mesh, (c) 3D mesh.}
 \label{fig:mesh}
 \end{figure}
 
-Circuit-level simulation uses netlist extraction with SAX for S-parameter analysis~\cite{sax} and VLSIR for Spice formats. Design rule checking integrates with KLayout through an extensible API.
+Full-wave electromagnetic simulation is supported through three FDTD backends: MEEP~\cite{meep} (open-source), Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration), and Lumerical FDTD. FEM and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, MPB for photonic crystals, and MEOW for eigenmode expansion. TCAD simulation uses DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation.
+
+\section{Circuit Simulation}
+
+Circuit-level simulation enables system-scale photonic design through netlist extraction and S-parameter composition. SAX~\cite{sax} provides differentiable S-parameter circuit simulation using JAX, supporting automatic differentiation for gradient-based optimization, Monte Carlo analysis for yield estimation, and wavelength-dependent S-parameter interpolation from FDTD results. VLSIR provides SPICE netlist export for mixed photonic-electronic simulation.
 
 \section{Process Design Kits}
 
@@ -90,17 +104,25 @@ Open-source PDKs include GlobalFoundries 180nm, SkyWater 130nm~\cite{skywater}, 
 
 \section{Conclusion}
 
-Gdsfactory provides a unified Python-driven workflow for chip design, verification, and validation. Its integration with simulators, open-source PDKs, and extensible architecture accelerates hardware development across photonics, quantum, and analog applications. The library is freely available at \url{https://github.com/gdsfactory/gdsfactory}.
+GDSFactory provides a unified Python-driven workflow spanning layout design, device simulation, and circuit simulation. The tight integration between FDTD solvers (MEEP, Tidy3D, Lumerical), FEM tools (Femwell, DEVSIM), and circuit simulators (SAX) enables rapid design iteration from component to system level. The library is freely available at \url{https://github.com/GDSFactory/GDSFactory}.
 
 \begin{thebibliography}{99}
 
-\bibitem{gdsfactory} J. Matres \textit{et al.}, ``gdsfactory,'' GitHub (2024), \url{https://github.com/gdsfactory/gdsfactory}.
+\bibitem{gdsfactory} J. Matres \textit{et al.}, ``GDSFactory,'' GitHub (2024), \url{https://github.com/GDSFactory/GDSFactory}.
 
 \bibitem{bogaerts2018} W. Bogaerts \textit{et al.}, ``Silicon photonics circuit design: methods, tools and challenges,'' Laser Photon. Rev. \textbf{12}, 1700237 (2018).
 
-\bibitem{gdstk} L. H. Gabrielli, ``gdstk,'' GitHub (2023), \url{https://github.com/heitzmann/gdstk}.
+\bibitem{klayout} M. K\"offerlein, ``KLayout,'' \url{https://www.klayout.de/}.
 
 \bibitem{meep} A. F. Oskooi \textit{et al.}, ``MEEP: A flexible free-software package for electromagnetic simulations by the FDTD method,'' Comput. Phys. Commun. \textbf{181}, 687--702 (2010).
+
+\bibitem{tidy3d} Flexcompute Inc., ``Tidy3D,'' \url{https://www.flexcompute.com/tidy3d/}.
+
+\bibitem{femwell} H. Gehring \textit{et al.}, ``Femwell,'' GitHub (2023), \url{https://github.com/HelgeGehring/femwell}.
+
+\bibitem{devsim} J. E. Sanchez, ``DEVSIM,'' \url{https://devsim.org/}.
+
+\bibitem{palace} AWS, ``Palace: 3D Finite Element Solver for Computational Electromagnetics,'' GitHub (2024), \url{https://github.com/awslabs/palace}.
 
 \bibitem{sax} F. Laporte, ``SAX,'' GitHub (2023), \url{https://github.com/flaport/sax}.
 
