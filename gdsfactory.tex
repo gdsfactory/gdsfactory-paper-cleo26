@@ -47,14 +47,14 @@
 \maketitle
 
 \begin{abstract}
-We present GDSFactory, an open-source Python library for integrated circuit design automation supporting photonics, analog, quantum, and MEMS applications. The platform provides unified workflows spanning layout design, device simulation, and circuit simulation via S-parameter analysis.
+We present GDSFactory, an open-source Python library for integrated circuit design automation supporting photonics, analog, quantum, and MEMS applications. The platform provides unified workflows for full chip development: layout design and simulations (device and circuit via S-parameter analysis).
 \end{abstract}
 
 \section{Introduction}
 
-Hardware iterations typically require months and millions of dollars, while software iterations cost hundreds of dollars and take hours. GDSFactory bridges this gap by providing a comprehensive Python API for chip development, including layout design, device simulation, circuit simulation, and verification~\cite{gdsfactory}.
+Hardware iterations typically require months and millions of dollars, whereas software iterations cost hundreds of dollars and take hours. GDSFactory bridges this gap by providing a comprehensive and complete Python API for chip development, including layout design, device simulation, circuit simulation, and verification~\cite{gdsfactory}.
 
-Unlike constrained logic-driven electronic design flows~\cite{bogaerts2018}, integrated photonics requires freeform parametric geometries and tight integration between layout and electromagnetic simulation. GDSFactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, directional ports, routing, and seamless interfaces to industry-standard simulators---all in Python's extensive scientific ecosystem~\cite{awesome} (Fig.~\ref{fig:flow}).
+In contrast to traditional logic-driven electronic design flows~\cite{bogaerts2018}, integrated photonics requires freeform parametric geometries and tight integration between layout and electromagnetic simulation. GDSFactory addresses this with scriptable parametric cells (PCells), hierarchical assembly, routing, and seamless interfaces to industry-standard simulators while leveraging Python's extensive scientific ecosystem~\cite{awesome} (Fig.~\ref{fig:flow}).
 
 \begin{figure}[htbp]
 \centering
@@ -69,7 +69,7 @@ GDSFactory implements cells as Python functions returning a \texttt{Component} c
 
 \section{Device Simulation}
 
-GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH~\cite{gmsh} (through a wrapper~\cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}). Finite-difference time domain electromagnetic simulation is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI\@, as well as proprietary solvers Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. FEM and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW~\cite{meow} for eigenmode expansion. TCAD simulation uses DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation. % chktex 13
+GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH \cite{gmsh} (through a wrapper \cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}) For rigorous electromagnetic verification required by photonics, the library supports full-wave analysis via both Finite-Difference Time Domain (FDTD) and Finite Element Method (FEM) approaches. The FDTD method is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI, as well as solvers commonly used in industry such as Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. Available FEM-based and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW \cite{meow} for eigenmode expansion. For lower-level modeling, TCAD simulations are also supported through DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation. % chktex 13
 
 \begin{figure}[htbp]
 \centering
@@ -80,7 +80,7 @@ GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to 
 
 \section{Circuit Simulation}
 
-Circuit-level simulation enables system-scale photonic design. GDSFactory facilitates this through netlist extraction, which enables compositions of device-level simulations. For instance, we have used SAX~\cite{sax} for differentiable S-parameter circuit simulation using JAX, supporting automatic differentiation for gradient-based optimization, Monte Carlo analysis for yield estimation, and wavelength-dependent S-parameter interpolation from FDTD results. VLSIR provides SPICE netlist export for mixed photonic-electronic simulation.
+Circuit-level simulation enables system-scale photonic design. GDSFactory facilitates this through netlist extraction, which enables compositions of device-level simulations. For example, we have used SAX~\cite{sax} for differentiable S-parameter circuit simulation using JAX, which supports automatic differentiation for gradient-based optimization, Monte Carlo analysis for yield estimation, and wavelength-dependent S-parameter interpolation from FDTD results. VLSIR provides SPICE netlist export for mixed photonic-electronic simulation.
 
 \section{Process Design Kits}
 
