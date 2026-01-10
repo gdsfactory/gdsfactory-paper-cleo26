@@ -31,7 +31,7 @@
 
 \title{GDSFactory: An Open-Source Python Library for Chip Design and Simulation}
 
-\author{Joaquin Matres,\authormark{1,*} Simon Bilodeau,\authormark{2} Niko Savola,\authormark{3,4} Marc de Cea,\authormark{3} Wai Kwan Yeung,\authormark{5} Erman Timurdogan,\authormark{6} Jan David Fischbach,\authormark{7} Helge Gehring,\authormark{8} Lucas Grosjean,\authormark{9} Floris Laporte,\authormark{1} Sebastian Goeldi,\authormark{1} and Troy Tamas\authormark{1}}
+\author{Joaquin Matres,\authormark{1,*} Simon Bilodeau,\authormark{2} Niko Savola,\authormark{3,4} Marc de Cea,\authormark{3} Wai Kwan Yeung,\authormark{5} Erman Timurdogan,\authormark{6} Jan David Fischbach,\authormark{7} Helge Gehring,\authormark{8} Lucas Grosjean,\authormark{9} Yannik Mahlau,\authormark{10} Floris Laporte,\authormark{1} Sebastian Goeldi,\authormark{1} and Troy Tamas\authormark{1}}
 
 \address{\authormark{1}GDSFactory, 650 Castro St Ste 120 PMB 98035, Mountain View, CA 94041, USA\\
 \authormark{2}Department of Electrical and Computer Engineering, Princeton University, Princeton, NJ 08544, USA\\
@@ -41,7 +41,8 @@
 \authormark{6}Lumentum, San Jose, CA, USA\\
 \authormark{7}Institute of Nanotechnology, Karlsruhe Institute of Technology (KIT), Karlsruhe, Germany\\
 \authormark{8}Institute of Physics and Center for Nanotechnology, University of Münster, Münster D-48149, Germany\\
-\authormark{9}Department of Optics, FEMTO-ST Institute, 25000 Besançon, France}
+\authormark{9}Department of Optics, FEMTO-ST Institute, 25000 Besançon, France\\
+\authormark{10}Institute of Information Processing, Leibniz University Hannover, Germany}
 
 \email{\authormark{*}jmatres@gdsfactory.com}
 
@@ -70,7 +71,7 @@ GDSFactory implements cells as Python functions returning a \texttt{Component} c
 
 \section{Device Simulation}
 
-GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH \cite{gmsh} (through a wrapper \cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}) For rigorous electromagnetic verification required by photonics, the library supports full-wave analysis via both Finite-Difference Time Domain (FDTD) and Finite Element Method (FEM) approaches. The FDTD method is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI, as well as solvers commonly used in industry such as Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. Available FEM-based and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW \cite{meow} for eigenmode expansion. For lower-level modeling, TCAD simulations are also supported through DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation. % chktex 13
+GDSFactory's gplugins repository~\cite{gplugins} provides unified interfaces to a growing list of simulators by reusing the core layout abstractions (Components, Layerstacks, Ports). For instance, Components can be meshed via GMSH \cite{gmsh} (through a wrapper \cite{meshwell}) for cross-sectional or 3D analysis (Fig.~\ref{fig:mesh}) For rigorous electromagnetic verification required by photonics, the library supports full-wave analysis via both Finite-Difference Time Domain (FDTD) and Finite Element Method (FEM) approaches. The FDTD method is supported through open-source backends including MEEP~\cite{meep} and Luminescent AI, as well as solvers commonly used in industry such as Tidy3D~\cite{tidy3d} (cloud-based GPU acceleration) and Lumerical FDTD. A plugin for the open-source fdtdx solver is currently in development~\cite{fdtdx}. Available FEM-based and multiphysics solvers include Femwell~\cite{femwell} for waveguide mode analysis and thermal simulation, Palace~\cite{palace} for RF and microwave simulations, and MEOW \cite{meow} for eigenmode expansion. For lower-level modeling, TCAD simulations are also supported through DEVSIM~\cite{devsim} for semiconductor device physics and Sentaurus for advanced process simulation. % chktex 13
 
 \begin{figure}[htbp]
 \centering
@@ -110,6 +111,8 @@ GDSFactory provides a unified Python-driven workflow spanning layout, device sim
 \bibitem{meep} A. F. Oskooi \textit{et al.}, ``MEEP: A flexible free-software package for electromagnetic simulations by the FDTD method,'' Comput.\ Phys.\ Commun.\ \textbf{181}, 687--702 (2010). % chktex 13
 
 \bibitem{tidy3d} Flexcompute Inc., ``Tidy3D,'' \url{https://www.flexcompute.com/tidy3d/}.
+
+\bibitem{fdtdx} Y. Mahlau \textit{et al.}, ``A flexible framework for large-scale FDTD simulations: open-source inverse design for 3D nanostructures,'' in \textit{Photonic and Phononic Properties of Engineered Nanostructures XV}, vol.~13377, pp. 40--52 (2025), \url{https://github.com/ymahlau/fdtdx}.
 
 \bibitem{femwell} H. Gehring \textit{et al.}, ``Femwell,'' GitHub (2023), \url{https://github.com/HelgeGehring/femwell}.
 
